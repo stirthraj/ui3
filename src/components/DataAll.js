@@ -1,23 +1,29 @@
-import axios from 'axios';
-import React, { Component } from 'react'
+import axios from "axios";
+import React, { Component } from "react";
 
 export default class DataAll extends Component {
   constructor(props) {
     super(props);
-    this.state = { users: [],page:0};
+    this.state = { users: [], page: 0 };
   }
-  componentDidMount(){
-         axios
-           .get(
-             "https://raw.githubusercontent.com/accuknox/TrainingAPI/main/medium.json"
-           )
-           .then((res) => {
-             // console.log(res.data.length);
+  componentDidMount() {
+    axios
+      .get(
+        "https://raw.githubusercontent.com/accuknox/TrainingAPI/main/medium.json"
+      )
+      .then((res) => {
+        // console.log(res.data.length);
 
-             const users = res.data;
-             const len = users.length;
-             this.setState({ users, len });
-           });
+        let users = res.data.filter((usr) => {
+          return !usr.firstName.search(this.props.search);
+        });
+        let len = users.length;
+        if (len < 1) {
+          users = res.data;
+          len = users.length;
+        }
+        this.setState({ users, len });
+      });
   }
   componentDidUpdate() {
     if (this.props.apitype === "small") {
@@ -28,12 +34,17 @@ export default class DataAll extends Component {
         .then((res) => {
           // console.log(res.data.length);
 
-          const users = res.data;
-          const len = users.length;
+          let users = res.data.filter((usr) => {
+            return !usr.firstName.search(this.props.search);
+          });
+          let len = users.length;
+          if (len < 1) {
+            users = res.data;
+            len = users.length;
+          }
           this.setState({ users, len });
         });
-    }
-     else if (this.props.apitype === "medium") {
+    } else if (this.props.apitype === "medium") {
       axios
         .get(
           "https://raw.githubusercontent.com/accuknox/TrainingAPI/main/medium.json"
@@ -41,42 +52,51 @@ export default class DataAll extends Component {
         .then((res) => {
           // console.log(res.data.length);
 
-          const users = res.data;
-          const len = users.length;
+          let users = res.data.filter((usr) => {
+            return !usr.firstName.search(this.props.search);
+          });
+          let len = users.length;
+          if (len < 1) {
+            users = res.data;
+            len = users.length;
+          }
           this.setState({ users, len });
         });
-    }
-     else {
+    } else {
       axios
         .get(
           "https://raw.githubusercontent.com/accuknox/TrainingAPI/main/large.json"
         )
         .then((res) => {
           // console.log(res.data.length);
-
-          const users = res.data;
-          const len = users.length;
+          let users = res.data.filter((usr) => {
+            return !usr.firstName.search(this.props.search);
+          });
+          let len = users.length;
+          if (len < 1) {
+            users = res.data;
+            len = users.length;
+          }
           this.setState({ users, len });
         });
     }
   }
 
-  onChangePrev=()=>{
-     this.setState({page:this.state.page-1})
-  }
-  onChangeNext=()=>{
-
-      this.setState({page:this.state.page+1})
-  }
+  onChangePrev = () => {
+    this.setState({ page: this.state.page - 1 });
+  };
+  onChangeNext = () => {
+    this.setState({ page: this.state.page + 1 });
+  };
 
   render() {
     const noOfData = this.props.noOfData;
     const len = this.state.len;
-    const start=Math.abs(this.state.page*noOfData);
-    if(start>=len){
-        this.setState({page:0})
+    const start = Math.abs(this.state.page * noOfData);
+    if (start >= len) {
+      this.setState({ page: 0 });
     }
-    const end=start + parseInt(noOfData);
+    const end = start + parseInt(noOfData);
     return (
       <div>
         <div>
@@ -90,9 +110,12 @@ export default class DataAll extends Component {
               </tr>
             </thead>
             <tbody>
+              {/* .filter((usr)=>{return usr.firstName===this.props.search;}) */}
               {this.state.users.slice(start, end).map((user) => (
                 <tr key={user.id}>
-                  <td>{user.firstName + user.lastName}</td>
+                  <td>
+                    {user.firstName} {user.lastName}
+                  </td>
                   <td>{user.location}</td>
                   <td>{user.date}</td>
                   <td>{user.salary}</td>
@@ -113,7 +136,8 @@ export default class DataAll extends Component {
               Showing {start} to {end} of {len} entries
             </div>
             <div>
-                <button onClick={this.onChangePrev}>Prev</button><button onClick={this.onChangeNext}>Next</button>
+              <button onClick={this.onChangePrev}>Prev</button>
+              <button onClick={this.onChangeNext}>Next</button>
             </div>
           </div>
         </div>

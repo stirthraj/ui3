@@ -21,3 +21,7 @@ td {
 tr:nth-child(even) {
   background-color: #e8e2e2;
 }
+button:hover{
+  background-color: rgb(93, 93, 187);
+  padding: 1px;
+}
