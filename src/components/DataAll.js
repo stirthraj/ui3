@@ -7,7 +7,7 @@ export default class DataAll extends Component {
     this.state = { users: [] };
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     if (this.props.apitype === "small") {
       axios
         .get(

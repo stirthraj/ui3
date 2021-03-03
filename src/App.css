@@ -1,16 +1,23 @@
-*,*::after,*::before{
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
-table{
+table {
   width: 100%;
-  margin:10px;
+  margin: 10px;
   border-collapse: collapse;
 }
-th,tr,td{
-  border:1px solid #ddd;
+th,
+tr,
+td {
+  border: 1px solid #ddd;
   padding: 5px;
 }
-.flex{
+.flex {
   display: flex;
   justify-content: space-between;
+}
+tr:nth-child(even) {
+  background-color: #e8e2e2;
 }
