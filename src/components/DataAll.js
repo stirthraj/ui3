@@ -6,7 +6,19 @@ export default class DataAll extends Component {
     super(props);
     this.state = { users: [] };
   }
+  componentDidMount(){
+         axios
+           .get(
+             "https://raw.githubusercontent.com/accuknox/TrainingAPI/main/medium.json"
+           )
+           .then((res) => {
+             // console.log(res.data.length);
 
+             const users = res.data;
+             const len = users.length;
+             this.setState({ users, len });
+           });
+  }
   componentDidUpdate() {
     if (this.props.apitype === "small") {
       axios
@@ -20,7 +32,8 @@ export default class DataAll extends Component {
           const len = users.length;
           this.setState({ users, len });
         });
-    } else if (this.props.apitype === "medium") {
+    }
+     else if (this.props.apitype === "medium") {
       axios
         .get(
           "https://raw.githubusercontent.com/accuknox/TrainingAPI/main/medium.json"
@@ -32,7 +45,8 @@ export default class DataAll extends Component {
           const len = users.length;
           this.setState({ users, len });
         });
-    } else {
+    }
+     else {
       axios
         .get(
           "https://raw.githubusercontent.com/accuknox/TrainingAPI/main/large.json"
