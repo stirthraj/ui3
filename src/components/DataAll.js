@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 export default class DataAll extends Component {
   constructor(props) {
     super(props);
-    this.state = { users: [] };
+    this.state = { users: [],page:0};
   }
   componentDidMount(){
          axios
@@ -61,8 +61,22 @@ export default class DataAll extends Component {
     }
   }
 
+  onChangePrev=()=>{
+     this.setState({page:this.state.page-1})
+  }
+  onChangeNext=()=>{
+
+      this.setState({page:this.state.page+1})
+  }
+
   render() {
     const noOfData = this.props.noOfData;
+    const len = this.state.len;
+    const start=Math.abs(this.state.page*noOfData);
+    if(start>=len){
+        this.setState({page:0})
+    }
+    const end=start + parseInt(noOfData);
     return (
       <div>
         <div>
@@ -76,7 +90,7 @@ export default class DataAll extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.users.slice(0, noOfData).map((user) => (
+              {this.state.users.slice(start, end).map((user) => (
                 <tr key={user.id}>
                   <td>{user.firstName + user.lastName}</td>
                   <td>{user.location}</td>
@@ -94,10 +108,13 @@ export default class DataAll extends Component {
               </tr>
             </tfoot>
           </table>
-          <div>
-            <h6>
-              Showing 1 to {noOfData} of {this.state.len} entries
-            </h6>
+          <div className="flex">
+            <div>
+              Showing {start} to {end} of {len} entries
+            </div>
+            <div>
+                <button onClick={this.onChangePrev}>Prev</button><button onClick={this.onChangeNext}>Next</button>
+            </div>
           </div>
         </div>
       </div>

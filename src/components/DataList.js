@@ -27,12 +27,17 @@ export default class DataList extends Component {
       <div>
         <div className="flex">
           <div>
-            Show <input type="number" value={noOfData} onChange={this.onChangeHandle} />
+            Show{" "}
+            <input
+              type="number"
+              value={noOfData}
+              onChange={this.onChangeHandle}
+            />
             Entries
           </div>
           <div>
             <label>
-              Pick Api type:{this.state.value}
+              <b>Pick Api type:</b>
               <select value={value} onChange={this.onChangeHandleApi}>
                 <option value="small">Small</option>
                 <option value="medium">Medium</option>
