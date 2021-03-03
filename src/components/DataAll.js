@@ -35,7 +35,9 @@ export default class DataAll extends Component {
           // console.log(res.data.length);
 
           let users = res.data.filter((usr) => {
-            return !usr.firstName.search(this.props.search);
+            return !usr.firstName
+              .toLowerCase()
+              .search(this.props.search.toLowerCase());
           });
           let len = users.length;
           if (len < 1) {
@@ -53,7 +55,9 @@ export default class DataAll extends Component {
           // console.log(res.data.length);
 
           let users = res.data.filter((usr) => {
-            return !usr.firstName.search(this.props.search);
+            return !usr.firstName
+              .toLowerCase()
+              .search(this.props.search.toLowerCase());
           });
           let len = users.length;
           if (len < 1) {
@@ -70,7 +74,9 @@ export default class DataAll extends Component {
         .then((res) => {
           // console.log(res.data.length);
           let users = res.data.filter((usr) => {
-            return !usr.firstName.search(this.props.search);
+            return !usr.firstName
+              .toLowerCase()
+              .search(this.props.search.toLowerCase());
           });
           let len = users.length;
           if (len < 1) {
