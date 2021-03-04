@@ -44,7 +44,7 @@ export default class DataList extends Component {
             </label>
           </div>
           <div>
-            {this.state.search}
+            {/* {this.state.search} */}
             <input
               type="text"
               placeholder="Search Name.."

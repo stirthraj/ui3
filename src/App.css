@@ -3,25 +3,51 @@
 *::before {
   box-sizing: border-box;
 }
-table {
-  width: 100%;
+.table {
+  width: 95%;
   margin: 10px;
   border-collapse: collapse;
 }
-th,
-tr,
-td {
+.trow{
+  min-width: 400px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.thcol,
+.tcol {
+  width: 100%;
   border: 1px solid #ddd;
   padding: 5px;
+}
+.thcol{
+  background-color: black;
+  color: #ddd;
 }
 .flex {
   display: flex;
   justify-content: space-between;
 }
-tr:nth-child(even) {
-  background-color: #e8e2e2;
+.flex>div{
+  padding: 10px;
+  margin: 10px;
+}
+.trow:nth-child(even) {
+  background-color: #6f54b8;
 }
 button:hover{
   background-color: rgb(93, 93, 187);
   padding: 1px;
+}
+@media only screen and (max-width:600px){
+  .flex{
+    display: flex;
+    flex-flow: column;
+  }
+  .trow{
+  min-width: 400px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
+
 }

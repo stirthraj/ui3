@@ -106,37 +106,37 @@ export default class DataAll extends Component {
     return (
       <div>
         <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Date</th>
-                <th>Salary</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div className="table">
+            <div className="thead">
+              <div className="trow">
+                <div className="thcol">Name</div>
+                <div className="thcol">Location</div>
+                <div className="thcol">Date</div>
+                <div className="thcol">Salary</div>
+              </div>
+            </div>
+            <div className="tbody">
               {/* .filter((usr)=>{return usr.firstName===this.props.search;}) */}
               {this.state.users.slice(start, end).map((user) => (
-                <tr key={user.id}>
-                  <td>
+                <div className="trow" key={user.id}>
+                  <div className="tcol">
                     {user.firstName} {user.lastName}
-                  </td>
-                  <td>{user.location}</td>
-                  <td>{user.date}</td>
-                  <td>{user.salary}</td>
-                </tr>
+                  </div>
+                  <div className="tcol">{user.location}</div>
+                  <div className="tcol">{user.date}</div>
+                  <div className="tcol">{user.salary}</div>
+                </div>
               ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Date</th>
-                <th>Salary</th>
-              </tr>
-            </tfoot>
-          </table>
+            </div>
+            <div className="tfoot">
+              <div className="trow">
+                <div className="thcol">Name</div>
+                <div className="thcol">Location</div>
+                <div className="thcol">Date</div>
+                <div className="thcol">Salary</div>
+              </div>
+            </div>
+          </div>
           <div className="flex">
             <div>
               Showing {start} to {end} of {len} entries
