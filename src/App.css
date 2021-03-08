@@ -9,7 +9,6 @@
   border-collapse: collapse;
 }
 .trow{
-  min-width: 400px;
   display: flex;
   justify-content: space-evenly;
 }
@@ -44,7 +43,6 @@ button:hover{
     flex-flow: column;
   }
   .trow{
-  min-width: 400px;
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;

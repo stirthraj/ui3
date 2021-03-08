@@ -35,9 +35,9 @@ export default class DataAll extends Component {
           // console.log(res.data.length);
 
           let users = res.data.filter((usr) => {
-            return !usr.firstName
+            return (!usr.firstName
               .toLowerCase()
-              .search(this.props.search.toLowerCase());
+              .search(this.props.search.toLowerCase())|| !usr.lastName.toLowerCase().search(this.props.search.toLowerCase())) ;
           });
           let len = users.length;
           if (len < 1) {
@@ -55,9 +55,14 @@ export default class DataAll extends Component {
           // console.log(res.data.length);
 
           let users = res.data.filter((usr) => {
-            return !usr.firstName
-              .toLowerCase()
-              .search(this.props.search.toLowerCase());
+            return (
+              !usr.firstName
+                .toLowerCase()
+                .search(this.props.search.toLowerCase()) ||
+              !usr.lastName
+                .toLowerCase()
+                .search(this.props.search.toLowerCase())
+            );
           });
           let len = users.length;
           if (len < 1) {
@@ -74,9 +79,14 @@ export default class DataAll extends Component {
         .then((res) => {
           // console.log(res.data.length);
           let users = res.data.filter((usr) => {
-            return !usr.firstName
-              .toLowerCase()
-              .search(this.props.search.toLowerCase());
+            return (
+              !usr.firstName
+                .toLowerCase()
+                .search(this.props.search.toLowerCase()) ||
+              !usr.lastName
+                .toLowerCase()
+                .search(this.props.search.toLowerCase())
+            );
           });
           let len = users.length;
           if (len < 1) {
@@ -123,7 +133,9 @@ export default class DataAll extends Component {
                     {user.firstName} {user.lastName}
                   </div>
                   <div className="tcol">{user.location}</div>
-                  <div className="tcol">{user.date}</div>
+                  <div className="tcol">
+                    {(new Date(parseInt(user.date))).toGMTString()}
+                  </div>
                   <div className="tcol">{user.salary}</div>
                 </div>
               ))}
@@ -151,3 +163,23 @@ export default class DataAll extends Component {
     );
   }
 }
+// function prettyDate(a){
+//   var date=new Date(parseInt(a));
+//   console.info(typeof(a));
+//   var months = [
+//     "Jan",
+//     "Feb",
+//     "Mar",
+//     "Apr",
+//     "May",
+//     "Jun",
+//     "Jul",
+//     "Aug",
+//     "Sep",
+//     "Oct",
+//     "Nov",
+//     "Dec",
+//   ];
+//   // return date.getUTCDate() + "/" + months[date.getUTCMonth()] + "/" + date.getUTCFullYear()+" | "+date.getUTCHours()+":"+date.getUTCMinutes()+":"+date.getUTCSeconds();
+//   return date;
+// }
