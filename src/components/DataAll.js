@@ -112,7 +112,10 @@ export default class DataAll extends Component {
     if (start >= len) {
       this.setState({ page: 0 });
     }
-    const end = start + parseInt(noOfData);
+    let end = start + parseInt(noOfData);
+    if(end>len){
+      end=len;
+    }
     return (
       <div>
         <div>
