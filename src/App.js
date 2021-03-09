@@ -16,6 +16,7 @@ else{
   return (
     <>
       <h1>Application</h1>
+      <DataList />
       <BrowserRouter>
         <Switch>
           <Route path="/dashboard">
