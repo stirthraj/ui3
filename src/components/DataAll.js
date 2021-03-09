@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React, { Component} from "react";
 
 export default class DataAll extends Component {
   constructor(props) {
@@ -116,6 +116,10 @@ export default class DataAll extends Component {
     if(end>len){
       end=len;
     }
+    // pagination concepts
+    // let a = len / (end - start);
+
+        // end js
     return (
       <div>
         <div>
@@ -137,7 +141,7 @@ export default class DataAll extends Component {
                   </div>
                   <div className="tcol">{user.location}</div>
                   <div className="tcol">
-                    {(new Date(parseInt(user.date))).toGMTString()}
+                    {new Date(parseInt(user.date)).toGMTString()}
                   </div>
                   <div className="tcol">{user.salary}</div>
                 </div>
@@ -166,23 +170,3 @@ export default class DataAll extends Component {
     );
   }
 }
-// function prettyDate(a){
-//   var date=new Date(parseInt(a));
-//   console.info(typeof(a));
-//   var months = [
-//     "Jan",
-//     "Feb",
-//     "Mar",
-//     "Apr",
-//     "May",
-//     "Jun",
-//     "Jul",
-//     "Aug",
-//     "Sep",
-//     "Oct",
-//     "Nov",
-//     "Dec",
-//   ];
-//   // return date.getUTCDate() + "/" + months[date.getUTCMonth()] + "/" + date.getUTCFullYear()+" | "+date.getUTCHours()+":"+date.getUTCMinutes()+":"+date.getUTCSeconds();
-//   return date;
-// }
