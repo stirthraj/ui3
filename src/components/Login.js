@@ -5,7 +5,7 @@ export default function Login(){
 
     function onSubmitHandle(e){
         e.preventDefault();
-        localStorage.setItem("token",token);
+        sessionStorage.setItem("token",token);
         window.location.reload();
     }
     return(

@@ -8,7 +8,7 @@ import DataList from './components/DataList';
 
 function App() {
   const tokenid='1234';
-  const token=localStorage.getItem("token");
+  const token=sessionStorage.getItem("token");
   if(token!==tokenid){
     return <Login/>
   }
