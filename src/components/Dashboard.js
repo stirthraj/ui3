@@ -40,6 +40,7 @@ function Dashboard() {
     const [error, setError] = useState("");
     const [api, setApi] = useState(apis["small"]);
     const [data, setData] = useState([]);
+    const [entries,setEntries]=useState(10);
 
     useEffect(() => {
       axios.get(api).then((res) => {
@@ -64,6 +65,11 @@ function Dashboard() {
             <option value={apis["medium"]}>medium</option>
             <option value={apis["large"]}>large</option>
           </select>
+          <select onChange={(e) => setEntries(e.target.value)}>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+          </select>
           {/* <button type="submit">Submit</button> */}
         </form>
         <div className="table">
@@ -77,7 +83,7 @@ function Dashboard() {
           </div>
           <div className="tbody">
             {/* .filter((usr)=>{return usr.firstName===this.props.search;}) */}
-            {data.map((user) => (
+            {data.slice(0,entries).map((user) => (
               <div className="trow" key={user.id}>
                 <div className="tcol">
                   {user.firstName} {user.lastName}
