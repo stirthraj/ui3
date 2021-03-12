@@ -1,0 +1,13 @@
+$pBtn:rgb(201, 70, 70);
+
+.container{
+    padding: 10px;
+    color:$pBtn;
+}
+.nav{
+ display:flex;
+ flex-direction: row;
+ justify-content: space-evenly;
+ font-size: 2em;
+ font-weight: 700;
+}
