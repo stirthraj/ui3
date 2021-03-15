@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import ErrorBoundary from "./ErrorBoundary";
 
 const apis = {
   small:
@@ -30,7 +31,9 @@ function Dashboard() {
             <About />
           </Route>
           <Route exact path="/contact">
-            <Contact />
+            <ErrorBoundary>
+              <Contact />
+            </ErrorBoundary>
           </Route>
         </BrowserRouter>
       </div>
@@ -42,11 +45,12 @@ function Dashboard() {
     const [data, setData] = useState([]);
     const [entries,setEntries]=useState(10);
 
+
     useEffect(() => {
       axios.get(api).then((res) => {
         setData(res.data);
       });
-    }, [api]);
+    }, [api,entries]);
 
     const onHandleSubmit = async (e) => {
       e.preventDefault();
@@ -56,6 +60,30 @@ function Dashboard() {
         setError("Error Occured");
       }
     };
+
+    // pagination component
+    let start=0;
+    let end=0+entries;
+    let len=data.length;
+    if(start=0){
+      document.getElementById("prev").style.display="none";
+    }
+    else if(end===len){
+      document.getElementById("next").style.display="none"
+    }
+    let pgbtns=len/entries;
+    let pgbtn = 0;
+    function Pagination(){
+      if(pgbtn<=4){
+        pgbtn++;
+            return (
+              <>
+                <button>Pg:{pgbtn}</button>
+              </>
+            );
+      }
+    }
+
     return (
       <div>
         Home:{error}
@@ -83,7 +111,7 @@ function Dashboard() {
           </div>
           <div className="tbody">
             {/* .filter((usr)=>{return usr.firstName===this.props.search;}) */}
-            {data.slice(0,entries).map((user) => (
+            {data.slice(0, entries).map((user) => (
               <div className="trow" key={user.id}>
                 <div className="tcol">
                   {user.firstName} {user.lastName}
@@ -105,6 +133,9 @@ function Dashboard() {
             </div>
           </div>
         </div>
+        <button id="prev">Prev</button>
+        <Pagination/>
+        <button id="next">Next</button>
       </div>
     );
   }
@@ -112,7 +143,19 @@ function Dashboard() {
     return <div>About</div>;
   }
   function Contact() {
-    return <div>Contact</div>;
+    const [val, setVal] = useState(0);
+    if (val === 5) {
+      throw new Error("Creashed");
+    }
+return (
+  <div>
+    Contact
+    <ErrorBoundary>
+      Error:{val}
+      <button onClick={() => setVal(val + 1)}>Inc</button>
+    </ErrorBoundary>
+  </div>
+);
   }
 }
 export default Dashboard;
