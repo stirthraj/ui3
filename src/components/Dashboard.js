@@ -145,13 +145,13 @@ function Dashboard() {
   function Contact() {
     const [val, setVal] = useState(0);
     if (val === 5) {
-      throw new Error("Creashed");
+      throw new Error("Crashed");
     }
 return (
   <div>
     Contact
     <ErrorBoundary>
-      Error:{val}
+      Error Msg after 4:{val}
       <button onClick={() => setVal(val + 1)}>Inc</button>
     </ErrorBoundary>
   </div>
