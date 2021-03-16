@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
+import Pagenation from "./Pagenation";
 
 const apis = {
   small:
@@ -73,16 +74,16 @@ function Dashboard() {
     }
     let pgbtns=len/entries;
     let pgbtn = 0;
-    function Pagination(){
-      if(pgbtn<=4){
-        pgbtn++;
-            return (
-              <>
-                <button>Pg:{pgbtn}</button>
-              </>
-            );
-      }
-    }
+    // function Pagination(){
+    //   if(pgbtn<=4){
+    //     pgbtn++;
+    //         return (
+    //           <>
+    //             <button>Pg:{pgbtn}</button>
+    //           </>
+    //         );
+    //   }
+    // }
 
     return (
       <div>
@@ -134,7 +135,7 @@ function Dashboard() {
           </div>
         </div>
         <button id="prev">Prev</button>
-        <Pagination/>
+        <Pagenation current={1} total={10}/>
         <button id="next">Next</button>
       </div>
     );
@@ -148,7 +149,7 @@ function Dashboard() {
       throw new Error("Crashed");
     }
 return (
-  <div>
+  <div style={{color:"red"}}>
     Contact
     <ErrorBoundary>
       Error Msg after 4:{val}

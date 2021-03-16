@@ -35,8 +35,8 @@
 }
 button:hover{
   background-color: rgb(93, 93, 187);
-  padding: 1px;
-  margin: 1px;
+  /* padding: 1px;
+  margin: 1px; */
 }
 @media only screen and (max-width:600px){
   .flex{
